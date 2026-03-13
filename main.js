@@ -29,11 +29,15 @@ function splitWords(el) {
   const text = el.textContent;
   el.innerHTML = '';
   el.setAttribute('aria-label', text);
-  return text.split(' ').map((word, i, arr) => {
+  const words = text.split(' ');
+  return words.map((word, i) => {
     const s = document.createElement('span');
-    s.textContent = word + (i < arr.length - 1 ? ' ' : '');
-    s.style.cssText = 'display:inline-block;opacity:0;transform:translateY(22px)';
+    s.textContent = word;
+    // display:inline preserves natural word spacing; inline-block collapses spaces
+    s.style.cssText = 'display:inline;opacity:0;';
     el.appendChild(s);
+    // Insert a real text-node space between words — never gets collapsed by the browser
+    if (i < words.length - 1) el.appendChild(document.createTextNode('\u0020'));
     return s;
   });
 }
@@ -283,8 +287,8 @@ document.querySelectorAll('.prose p').forEach(para => {
   gsap.set(para, { opacity:1, transform:'none' });
   ScrollTrigger.create({
     trigger: para, start:'top 89%',
-    onEnter:     () => gsap.to(words, { opacity:1, y:0, duration:0.48, stagger:0.022, ease:'power2.out' }),
-    onLeaveBack: () => gsap.set(words, { opacity:0, y:22 })
+    onEnter:     () => gsap.to(words, { opacity:1, duration:0.48, stagger:0.022, ease:'power2.out' }),
+    onLeaveBack: () => gsap.set(words, { opacity:0 })
   });
 });
 
@@ -518,8 +522,8 @@ document.querySelectorAll('#scene-5 .prose p').forEach(para => {
   gsap.set(para, { opacity:1, transform:'none' });
   ScrollTrigger.create({
     trigger: para, start:'top 88%',
-    onEnter:     () => gsap.to(words, { opacity:1, y:0, duration:0.5, stagger:0.022, ease:'power2.out' }),
-    onLeaveBack: () => gsap.set(words, { opacity:0, y:22 })
+    onEnter:     () => gsap.to(words, { opacity:1, duration:0.5, stagger:0.022, ease:'power2.out' }),
+    onLeaveBack: () => gsap.set(words, { opacity:0 })
   });
 });
 
