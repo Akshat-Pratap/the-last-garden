@@ -31,7 +31,7 @@
       --font-body:    'Jost', sans-serif;
 
       --max-w: 680px;
-      --section-pad: clamp(60px, 10vw, 120px);
+      --section-pad: clamp(80px, 14vw, 160px);
     }
 
     /* ============================================================
@@ -41,7 +41,7 @@
 
     html {
       scroll-behavior: smooth;
-      font-size: 19px;
+      font-size: 18px;
     }
 
     body {
@@ -52,10 +52,6 @@
       line-height: 1.85;
       overflow-x: hidden;
       cursor: default;
-      hyphens: none;
-      -webkit-hyphens: none;
-      word-break: normal;
-      overflow-wrap: break-word;
     }
 
     /* ============================================================
@@ -139,7 +135,7 @@
     .hero-title {
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: clamp(2.6rem, 8vw, 5.5rem);
+      font-size: clamp(3.2rem, 10vw, 7rem);
       line-height: 1.05;
       color: var(--c-gold);
       letter-spacing: -0.01em;
@@ -157,7 +153,7 @@
       font-family: var(--font-display);
       font-style: italic;
       font-weight: 300;
-      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
       color: var(--c-text-muted);
       margin-bottom: 60px;
       opacity: 0;
@@ -194,33 +190,12 @@
     ============================================================ */
     .scene {
       min-height: 100vh;
-      height: auto;
       position: relative;
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: var(--section-pad) 24px;
       overflow: hidden;
-    }
-
-    /* Image wrap fills scene completely */
-    .scene-image-wrap {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    /* Base image — fills wrap with cover, centered */
-    .scene-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      opacity: 0;
-      will-change: transform;
-      position: absolute;
-      top: 0; left: 0;
     }
 
     /* Scene backgrounds — set via JS color tweens too */
@@ -233,7 +208,22 @@
     /* ============================================================
        SCENE IMAGE
     ============================================================ */
-    /* image wrap and scene-image defined in .scene block above */
+    .scene-image-wrap {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .scene-image {
+      width: 100%;
+      height: 120%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0;
+      transform: scale(1.1);
+      will-change: transform;
+    }
 
     .scene-image-overlay {
       position: absolute;
@@ -259,16 +249,6 @@
     /* Scene 5 — no image overlay needed */
     #scene-5 .scene-image-wrap { display: none; }
 
-    #scene-5 .scene-content {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto;
-    }
-
-    #scene-5 .prose p {
-      text-align: center;
-    }
-
     /* ============================================================
        SCENE CONTENT
     ============================================================ */
@@ -278,39 +258,6 @@
       max-width: var(--max-w);
       margin: 0 auto;
       width: 100%;
-      text-align: center;
-    }
-
-    /* Letter elements stay left — feels more natural for a letter */
-    .letter-text,
-    .letter-salutation,
-    .letter-signoff {
-      text-align: left;
-    }
-
-    /* Prose and dialogue — centered globally */
-    .prose p {
-      text-align: center;
-    }
-
-    .dialogue-line {
-      text-align: center;
-      border-left: none;
-      border-bottom: 1px solid rgba(232,201,122,0.2);
-      padding: 0 0 16px 0;
-    }
-
-    .dialogue-line.response {
-      text-align: center;
-      border-right: none;
-      padding: 0 0 16px 0;
-    }
-
-    /* Scene number and rule — center */
-    .scene-number,
-    .scene-rule {
-      margin-left: auto;
-      margin-right: auto;
     }
 
     /* ============================================================
@@ -319,21 +266,24 @@
     .scene-number {
       font-family: var(--font-body);
       font-weight: 200;
-      font-size: 0.72rem;
-      letter-spacing: 0.5em;
+      font-size: 0.65rem;
+      letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--c-gold-mid);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
+      opacity: 0;
+      transform: translateY(20px);
     }
 
     .scene-title {
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
-      line-height: 1.05;
+      font-size: clamp(2rem, 5vw, 3rem);
+      line-height: 1.1;
       color: var(--c-gold);
-      margin-bottom: 52px;
-      letter-spacing: -0.01em;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(30px);
     }
 
     #scene-5 .scene-title {
@@ -346,17 +296,18 @@
     .prose p {
       font-family: var(--font-body);
       font-weight: 300;
-      font-size: clamp(1.05rem, 1.8vw, 1.2rem);
-      line-height: 2.0;
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      line-height: 1.9;
       color: var(--c-text-dark);
-      margin-bottom: 2em;
-      letter-spacing: 0.01em;
-      hyphens: none;
-      -webkit-hyphens: none;
+      margin-bottom: 1.6em;
+      opacity: 0;
+      transform: translateY(24px);
     }
 
     #scene-5 .prose p {
       color: var(--c-ink);
+      opacity: 0;
+      transform: translateY(24px);
     }
 
     /* The dramatic word */
@@ -377,12 +328,14 @@
     .dialogue-line {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(1.2rem, 2.6vw, 1.6rem);
-      line-height: 1.55;
+      font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+      line-height: 1.5;
       color: var(--c-gold);
-      padding: 0 0 0 32px;
-      border-left: 2px solid var(--c-gold-mid);
-      margin-bottom: 24px;
+      padding: 0 0 0 28px;
+      border-left: 1px solid var(--c-gold-mid);
+      margin-bottom: 16px;
+      opacity: 0;
+      transform: translateX(-30px);
     }
 
     .dialogue-line.response {
@@ -422,13 +375,13 @@
     .revelation {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: clamp(1.4rem, 3.2vw, 2.2rem);
-      line-height: 1.55;
+      font-size: clamp(1.2rem, 3vw, 1.75rem);
+      line-height: 1.5;
       color: var(--c-gold);
       letter-spacing: 0;
       opacity: 0;
       transform: translateY(20px);
-      margin: 2.4em 0;
+      margin: 2em 0;
     }
 
     /* ============================================================
@@ -456,8 +409,8 @@
       font-family: var(--font-display);
       font-style: italic;
       font-weight: 300;
-      font-size: clamp(1rem, 1.9vw, 1.18rem);
-      line-height: 1.95;
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      line-height: 2;
       color: var(--c-ink);
       opacity: 0;
     }
@@ -475,9 +428,10 @@
       font-family: var(--font-display);
       font-style: italic;
       font-weight: 300;
-      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-size: clamp(1.1rem, 2.8vw, 1.6rem);
       color: var(--c-ink);
-      margin-bottom: 12px;
+      opacity: 0;
+      margin-bottom: 8px;
     }
 
     /* ============================================================
@@ -508,8 +462,9 @@
     .end-title {
       font-family: var(--font-display);
       font-weight: 300;
-      font-size: clamp(2rem, 5.5vw, 3.6rem);
+      font-size: clamp(2rem, 6vw, 4rem);
       color: var(--c-ink);
+      opacity: 0;
       letter-spacing: 0.02em;
     }
 
@@ -521,6 +476,7 @@
       text-transform: uppercase;
       color: rgba(44, 24, 16, 0.5);
       margin-top: 20px;
+      opacity: 0;
     }
 
     /* ============================================================
@@ -568,1063 +524,13 @@
       }
     }
 
-
-    /* ============================================================
-       GATE SCREEN — Enter the Garden
-    ============================================================ */
-    #gate-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 5000;
-      background: #0a0906;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 24px;
-      transition: opacity 1.4s ease, visibility 1.4s ease;
-    }
-
-    #gate-screen.hidden {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    /* Prevent body scroll until gate is dismissed */
-    body.gate-open {
-      overflow: hidden;
-    }
-
-    .gate-bg-image {
-      position: absolute;
-      inset: 0;
-      background-image: url('images/hero-bg.webp');
-      background-size: cover;
-      background-position: center;
-      opacity: 0.18;
-      z-index: 0;
-    }
-
-    /* Subtle vignette overlay */
-    .gate-vignette {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at center, transparent 30%, rgba(10,9,6,0.85) 100%);
-      z-index: 1;
-    }
-
-    .gate-content {
-      position: relative;
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-
-    .gate-eyebrow {
-      font-family: var(--font-body);
-      font-weight: 200;
-      font-size: 0.65rem;
-      letter-spacing: 0.5em;
-      text-transform: uppercase;
-      color: var(--c-gold-mid);
-      opacity: 0;
-      margin-bottom: 20px;
-    }
-
-    .gate-title {
-      font-family: var(--font-display);
-      font-weight: 300;
-      font-size: clamp(2.8rem, 8vw, 6rem);
-      line-height: 1.05;
-      color: var(--c-gold);
-      letter-spacing: -0.01em;
-      opacity: 0;
-      margin-bottom: 12px;
-    }
-
-    .gate-title em {
-      font-style: italic;
-      color: var(--c-gold-mid);
-    }
-
-    .gate-tagline {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(0.95rem, 2vw, 1.2rem);
-      color: var(--c-text-muted);
-      opacity: 0;
-      margin-bottom: 64px;
-    }
-
-    /* The pulsing enter button */
-    .gate-btn-wrap {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-    }
-
-    /* Ripple rings */
-    .gate-ring {
-      position: absolute;
-      border-radius: 50%;
-      border: 1px solid rgba(232, 201, 122, 0.25);
-      animation: gateRipple 3s ease-out infinite;
-      pointer-events: none;
-    }
-
-    .gate-ring:nth-child(1) { width: 110px; height: 110px; animation-delay: 0s; }
-    .gate-ring:nth-child(2) { width: 150px; height: 150px; animation-delay: 0.8s; }
-    .gate-ring:nth-child(3) { width: 190px; height: 190px; animation-delay: 1.6s; }
-
-    @keyframes gateRipple {
-      0%   { transform: scale(0.85); opacity: 0.6; }
-      100% { transform: scale(1.3);  opacity: 0; }
-    }
-
-    /* The button itself */
-    #enter-btn {
-      position: relative;
-      z-index: 2;
-      width: 86px;
-      height: 86px;
-      border-radius: 50%;
-      border: 1px solid rgba(232, 201, 122, 0.5);
-      background: rgba(232, 201, 122, 0.07);
-      color: var(--c-gold);
-      font-family: var(--font-body);
-      font-weight: 200;
-      font-size: 0.6rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: background 0.3s, border-color 0.3s, transform 0.2s;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-    }
-
-    #enter-btn:hover {
-      background: rgba(232, 201, 122, 0.14);
-      border-color: rgba(232, 201, 122, 0.9);
-      transform: scale(1.06);
-    }
-
-    #enter-btn:active {
-      transform: scale(0.97);
-    }
-
-    /* Leaf icon inside button — pure CSS */
-    .btn-leaf {
-      width: 22px;
-      height: 22px;
-      opacity: 0.85;
-    }
-
-    .gate-hint {
-      margin-top: 28px;
-      font-family: var(--font-body);
-      font-weight: 200;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--c-text-muted);
-      opacity: 0.5;
-    }
-
-    /* Sound wave indicator — shows after click */
-    .sound-waves {
-      display: flex;
-      align-items: flex-end;
-      gap: 3px;
-      height: 18px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      margin-top: 32px;
-    }
-
-    .sound-waves.playing { opacity: 1; }
-
-    .wave-bar {
-      width: 3px;
-      background: var(--c-gold-mid);
-      border-radius: 2px;
-      animation: waveAnim 0.8s ease-in-out infinite alternate;
-    }
-
-    .wave-bar:nth-child(1) { height: 6px;  animation-delay: 0s; }
-    .wave-bar:nth-child(2) { height: 12px; animation-delay: 0.1s; }
-    .wave-bar:nth-child(3) { height: 18px; animation-delay: 0.2s; }
-    .wave-bar:nth-child(4) { height: 12px; animation-delay: 0.3s; }
-    .wave-bar:nth-child(5) { height: 6px;  animation-delay: 0.4s; }
-
-    @keyframes waveAnim {
-      from { transform: scaleY(0.4); }
-      to   { transform: scaleY(1); }
-    }
-
-
-    /* ============================================================
-       SECTION B — LAYOUT VARIETY
-       Each scene gets a distinct visual structure
-    ============================================================ */
-
-    /* ── Scene 1: Full-bleed image, text floats LEFT overlay ── */
-    #scene-1 {
-      display: flex;
-      flex-direction: row;
-      align-items: stretch;
-      padding: 0;
-      min-height: 100vh;
-      justify-content: flex-start;
-    }
-
-    /* Text centered over full-bleed image — no background panel */
-    /* Text centered over full-bleed image — no background panel */
-    #scene-1 .scene-content {
-      position: relative;
-      z-index: 2;
-      margin: 0 auto;
-      width: 100%;
-      max-width: 720px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: clamp(48px, 7vw, 80px) clamp(32px, 6vw, 80px);
-      background: none;
-      text-align: center;
-    }
-
-    /* Override global left-align for scene-1 prose */
-    #scene-1 .prose p {
-      text-align: center;
-    }
-
-    #scene-1 .scene-title,
-    #scene-1 .scene-number,
-    #scene-1 .scene-rule {
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    /* Image — true full bleed behind everything */
-    #scene-1 .scene-image-wrap {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    /* Scene 1 flex — center content over image */
-    #scene-1 {
-      align-items: center;
-      justify-content: center;
-    }
-
-    #scene-1 .scene-image {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: 60% center;
-    }
-
-    #scene-1 .scene-image-overlay {
-      background: rgba(10, 9, 6, 0.52);
-    }
-
-    /* ── Scene 2: Full-bleed image, text centered ────────── */
-    #scene-2 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--section-pad) clamp(24px, 6vw, 80px);
-      min-height: 100vh;
-    }
-
-    #scene-2 .scene-content {
-      position: relative;
-      z-index: 2;
-      margin: 0 auto;
-      width: 100%;
-      max-width: 720px;
-      background: none;
-      text-align: center;
-      padding: 0;
-    }
-
-    #scene-2 .prose p,
-    #scene-2 .dialogue-line,
-    #scene-2 .pull-quote {
-      text-align: center;
-    }
-
-    #scene-2 .dialogue-line {
-      border-left: none;
-      border-right: none;
-      border-bottom: 1px solid rgba(232,201,122,0.2);
-      padding: 0 0 16px 0;
-      text-align: center;
-    }
-
-    #scene-2 .dialogue-line.response {
-      border-right: none;
-      text-align: center;
-      padding: 0 0 16px 0;
-    }
-
-    #scene-2 .scene-image-wrap {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      overflow: hidden;
-    }
-
-    #scene-2 .scene-image {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-    }
-
-    #scene-2 .scene-image-overlay {
-      background: rgba(15, 14, 12, 0.58);
-    }
-
-    /* ── Scene 3: Full-bleed image, text centered ────────── */
-    #scene-3 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--section-pad) clamp(24px, 6vw, 80px);
-    }
-
-    #scene-3 .scene-content {
-      position: relative;
-      z-index: 2;
-      max-width: 720px;
-      margin: 0 auto;
-      background: none;
-      text-align: center;
-    }
-
-    #scene-3 .prose p {
-      text-align: center;
-    }
-
-    #scene-3 .scene-image-overlay {
-      background: rgba(20, 16, 10, 0.60);
-    }
-
-    /* Arjun's dialogue — full-width breakout */
-    #arjun-quote {
-      width: 100vw;
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      padding: 60px clamp(24px, 8vw, 120px);
-      margin: 48px 0;
-      text-align: center;
-      background: rgba(232,201,122,0.04);
-      border-top: 1px solid rgba(232,201,122,0.12);
-      border-bottom: 1px solid rgba(232,201,122,0.12);
-    }
-
-    #arjun-quote .quote-main {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(1.5rem, 3.6vw, 2.8rem);
-      line-height: 1.3;
-      color: var(--c-gold);
-      display: block;
-      opacity: 0;
-      transform: translateY(24px);
-    }
-
-    #arjun-quote .quote-response {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(0.95rem, 2vw, 1.4rem);
-      color: var(--c-gold-mid);
-      display: block;
-      margin-top: 20px;
-      opacity: 0;
-      transform: translateY(16px);
-    }
-
-    #arjun-quote .quote-attr {
-      font-family: var(--font-body);
-      font-weight: 200;
-      font-size: 0.65rem;
-      letter-spacing: 0.35em;
-      text-transform: uppercase;
-      color: var(--c-text-muted);
-      display: block;
-      margin-top: 24px;
-      opacity: 0;
-    }
-
-    /* ── Scene 4: Full-bleed image, centered text overlay ─── */
-    #scene-4 {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: var(--section-pad) clamp(24px, 8vw, 120px);
-    }
-
-    #scene-4 .scene-content {
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
-    #scene-4 .scene-image-overlay {
-      background: rgba(30, 20, 8, 0.50);
-    }
-
-    #scene-4 .scene-content {
-      background: none;
-    }
-
-    #scene-4 .scene-title {
-      text-align: center;
-    }
-
-    #scene-4 .scene-number {
-      text-align: center;
-    }
-
-    #scene-4 .prose p {
-      text-align: center;
-      max-width: 580px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    #scene-4 .revelation {
-      text-align: center;
-    }
-
-    /* ── Mobile: stack all layouts vertically ──────────────── */
-    @media (max-width: 768px) {
-      #scene-1 {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      #scene-1 .scene-content {
-        width: 100%;
-        max-width: 100%;
-        min-height: 100vh;
-        background: none;
-        border-right: none;
-        padding: 48px 24px;
-        text-align: center;
-      }
-
-      #scene-2 {
-        padding: 48px 24px;
-      }
-
-      #scene-2 .scene-content {
-        padding: 0;
-      }
-
-      #arjun-quote {
-        padding: 40px 24px;
-      }
-
-      #arjun-quote .quote-main {
-        font-size: clamp(1.4rem, 5vw, 2rem);
-      }
-
-      #scene-4 {
-        padding: var(--section-pad) 24px;
-        text-align: left;
-      }
-
-      #scene-4 .scene-title,
-      #scene-4 .scene-number,
-      #scene-4 .prose p {
-        text-align: left;
-        margin-left: 0;
-        margin-right: 0;
-      }
-
-      #scene-4 .revelation {
-        text-align: left;
-      }
-    }
-
-    /* Drop cap removed — normal first letter */
-
-    /* Horizontal rule between scene number and content */
-    .scene-rule {
-      width: 48px;
-      height: 1px;
-      background: var(--c-gold-mid);
-      opacity: 0.5;
-      margin: 0 0 40px 0;
-      display: block;
-    }
-
-    /* Pull quote — large italic emphasis mid-prose */
-    .pull-quote {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: clamp(1.05rem, 2.4vw, 1.5rem);
-      line-height: 1.5;
-      color: var(--c-gold-mid);
-      border-left: 2px solid var(--c-gold-mid);
-      padding: 8px 0 8px 28px;
-      margin: 2em 0;
-      opacity: 0;
-    }
-
-    /* Highlight span — warms specific words gold */
-    .text-gold {
-      color: var(--c-gold-mid);
-      font-style: italic;
-    }
-
-    /* ============================================================
-       EXTRA IMAGES — scene2 strip + scene3 inset
-    ============================================================ */
-
-    /* Scene 2 — full-width image strip at bottom of scene */
-    .scene-extra-img {
-      width: 100%;
-      height: 280px;
-      position: relative;
-      overflow: hidden;
-      margin-top: 0;
-    }
-
-    .extra-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      opacity: 0;
-      will-change: transform;
-    }
-
-    .extra-img-caption {
-      position: absolute;
-      bottom: 20px;
-      right: 28px;
-      font-family: var(--font-body);
-      font-weight: 200;
-      font-size: 0.65rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(232,201,122,0.6);
-      opacity: 0;
-    }
-
-    /* Scene 3 — small inset image floated right */
-    .scene3-inset {
-      float: right;
-      width: clamp(160px, 28%, 240px);
-      height: clamp(200px, 35vw, 300px);
-      margin: 0 0 24px 32px;
-      overflow: hidden;
-      border-radius: 2px;
-      opacity: 0;
-      transform: translateX(30px);
-    }
-
-    .inset-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: center top;
-      background: var(--c-earth);
-    }
-
-    @media (max-width: 768px) {
-      .scene3-inset {
-        float: none;
-        width: 100%;
-        height: 200px;
-        margin: 0 0 24px 0;
-      }
-
-      .scene-extra-img {
-        height: 200px;
-      }
-    }
-
-    /* ============================================================
-       SECTION C — ENGAGEMENT & INTERACTIVITY
-    ============================================================ */
-
-    /* ── Ambient sound toggle ───────────────────────────────── */
-    #sound-toggle {
-      display: none !important;
-      position: fixed;
-      bottom: 28px;
-      left: 28px;
-      z-index: 500;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 1px solid rgba(232,201,122,0.3);
-      background: rgba(15,14,12,0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: border-color 0.3s, background 0.3s, transform 0.2s;
-    }
-
-    #sound-toggle:hover {
-      border-color: rgba(232,201,122,0.7);
-      background: rgba(232,201,122,0.1);
-      transform: scale(1.1);
-    }
-
-    #sound-toggle svg {
-      width: 18px;
-      height: 18px;
-      fill: none;
-      stroke: var(--c-gold-mid);
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      transition: opacity 0.3s;
-    }
-
-    #sound-toggle .icon-on  { display: block; }
-    #sound-toggle .icon-off { display: none; }
-    #sound-toggle.muted .icon-on  { display: none; }
-    #sound-toggle.muted .icon-off { display: block; }
-
-    /* Sound wave bars beside toggle when playing */
-    #sound-live {
-      display: none !important;
-      position: fixed;
-      bottom: 36px;
-      left: 80px;
-      z-index: 500;
-      display: flex;
-      align-items: flex-end;
-      gap: 3px;
-      height: 18px;
-      opacity: 0;
-      transition: opacity 0.4s;
-    }
-
-    #sound-live.active { opacity: 1; }
-
-    #sound-live span {
-      display: block;
-      width: 3px;
-      background: var(--c-gold-mid);
-      border-radius: 2px;
-      animation: livebar 0.9s ease-in-out infinite alternate;
-    }
-
-    #sound-live span:nth-child(1) { height:5px;  animation-delay:0s; }
-    #sound-live span:nth-child(2) { height:12px; animation-delay:0.1s; }
-    #sound-live span:nth-child(3) { height:18px; animation-delay:0.2s; }
-    #sound-live span:nth-child(4) { height:12px; animation-delay:0.3s; }
-    #sound-live span:nth-child(5) { height:5px;  animation-delay:0.4s; }
-
-    @keyframes livebar {
-      from { transform: scaleY(0.4); }
-      to   { transform: scaleY(1.0); }
-    }
-
-    /* ── Hero typing animation ──────────────────────────────── */
-    #hero-typing {
-      font-family: var(--font-display);
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(1rem, 2.2vw, 1.4rem);
-      color: var(--c-text-muted);
-      min-height: 2em;
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    #hero-typing .typing-cursor {
-      display: inline-block;
-      width: 2px;
-      height: 1.1em;
-      background: var(--c-gold-mid);
-      vertical-align: text-bottom;
-      margin-left: 2px;
-      animation: blink 1s step-end infinite;
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 1; }
-      50%       { opacity: 0; }
-    }
-
-    /* ── Progress flower nav ────────────────────────────────── */
-    #flower-nav {
-      position: fixed;
-      right: 22px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 100;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-    }
-
-    /* Hide old plain dots */
-    #scene-nav { display: none !important; }
-
-    .flower-petal {
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-      opacity: 0.45;
-      transition: opacity 0.3s, transform 0.3s;
-    }
-
-    .flower-petal:hover,
-    .flower-petal.active {
-      opacity: 1;
-      transform: scale(1.2);
-    }
-
-    @media (max-width: 600px) {
-      #flower-nav { display: none; }
-      #sound-toggle { bottom: 20px; left: 20px; }
-      #sound-live { display: none; }
-    }
-
-    /* ============================================================
-       SECTION D — LETTER REDESIGN
-       Makes the letter look like a real physical object
-    ============================================================ */
-
-    /* Remove old letter-wrap styles, replace entirely */
-    .letter-wrap {
-      background: #f8f0e0;
-      border: none;
-      border-radius: 1px;
-      padding: 52px 56px 48px;
-      margin: 48px auto;
-      max-width: 600px;
-      position: relative;
-      transform: rotate(-0.6deg);
-      box-shadow:
-        0 2px 8px rgba(44,24,16,0.12),
-        0 8px 32px rgba(44,24,16,0.08),
-        inset 0 0 60px rgba(44,24,16,0.04);
-    }
-
-    /* Torn paper edge at top */
-    .letter-wrap::before {
-      content: '';
-      position: absolute;
-      top: -8px; left: 0; right: 0;
-      height: 10px;
-      background: #f8f0e0;
-      border-radius: 0;
-      clip-path: polygon(
-        0% 100%, 2% 20%, 4% 80%, 6% 10%, 8% 70%,
-        10% 30%, 12% 90%, 14% 20%, 16% 75%, 18% 15%,
-        20% 85%, 22% 25%, 24% 70%, 26% 10%, 28% 80%,
-        30% 30%, 32% 90%, 34% 20%, 36% 75%, 38% 15%,
-        40% 85%, 42% 25%, 44% 70%, 46% 10%, 48% 80%,
-        50% 30%, 52% 90%, 54% 20%, 56% 75%, 58% 15%,
-        60% 85%, 62% 25%, 64% 70%, 66% 10%, 68% 80%,
-        70% 30%, 72% 90%, 74% 20%, 76% 75%, 78% 15%,
-        80% 85%, 82% 25%, 84% 70%, 86% 10%, 88% 80%,
-        90% 30%, 92% 90%, 94% 20%, 96% 75%, 98% 15%,
-        100% 60%, 100% 100%
-      );
-    }
-
-    /* Subtle aged paper lines */
-    .letter-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        transparent,
-        transparent 31px,
-        rgba(44,24,16,0.05) 31px,
-        rgba(44,24,16,0.05) 32px
-      );
-      pointer-events: none;
-      border-radius: 1px;
-    }
-
-    /* Wax seal decoration */
-    .letter-seal {
-      position: absolute;
-      bottom: -22px;
-      right: 40px;
-      width: 48px;
-      height: 48px;
-      z-index: 2;
-    }
-
-    .letter-seal svg {
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 2px 4px rgba(44,24,16,0.3));
-    }
-
-    /* Letter salutation */
-    .letter-salutation {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(0.9rem, 1.8vw, 1.05rem);
-      color: #6b4226;
-      margin-bottom: 24px;
-      display: block;
-      opacity: 0;
-    }
-
-    /* Overwrite letter-text for paper feel */
-    .letter-text {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-weight: 300;
-      font-size: clamp(1rem, 1.8vw, 1.12rem);
-      line-height: 2;
-      color: #3d2010;
-      opacity: 0;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* Letter sign-off */
-    .letter-signoff {
-      display: block;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-style: italic;
-      font-weight: 400;
-      font-size: clamp(1rem, 2vw, 1.2rem);
-      color: #6b4226;
-      margin-top: 32px;
-      text-align: right;
-      opacity: 0;
-    }
-
-    @media (max-width: 600px) {
-      .letter-wrap {
-        padding: 36px 28px 32px;
-        transform: rotate(-0.3deg);
-        margin: 32px 8px;
-      }
-      .letter-seal { bottom: -18px; right: 24px; }
-    }
-
-    /* ============================================================
-       SECTION E — PERFORMANCE & POLISH
-    ============================================================ */
-
-    /* ── Loading screen ───────────────────────────────────────── */
-    #loading-screen {
-      position: fixed;
-      inset: 0;
-      z-index: 9000;
-      background: var(--c-dark);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      transition: opacity 0.6s ease, visibility 0.6s ease;
-    }
-
-    #loading-screen.done {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    .loader-text {
-      font-family: var(--font-body);
-      font-weight: 200;
-      font-size: 0.65rem;
-      letter-spacing: 0.45em;
-      text-transform: uppercase;
-      color: var(--c-text-muted);
-    }
-
-    .loader-bar-wrap {
-      width: 120px;
-      height: 1px;
-      background: rgba(232,201,122,0.15);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .loader-bar {
-      position: absolute;
-      left: -100%;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--c-gold-mid);
-      animation: loaderSlide 1.4s ease-in-out forwards;
-    }
-
-    @keyframes loaderSlide {
-      0%   { left: -100%; }
-      60%  { left: 0%; }
-      100% { left: 100%; }
-    }
-
-    /* ── Custom scrollbar ─────────────────────────────────────── */
-    ::-webkit-scrollbar { width: 4px; }
-    ::-webkit-scrollbar-track { background: var(--c-dark); }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(232,201,122,0.3);
-      border-radius: 2px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: rgba(232,201,122,0.6);
-    }
-
-    /* ── Reading time indicator ───────────────────────────────── */
-    #reading-time {
-      position: fixed;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 500;
-      font-family: var(--font-body);
-      font-weight: 200;
-      font-size: 0.6rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(232,201,122,0.4);
-      pointer-events: none;
-      transition: opacity 0.4s;
-    }
-
-    /* ── Smooth scene transitions — fade strip ─────────────────  */
-    .scene-fade-strip {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 120px;
-      pointer-events: none;
-      z-index: 2;
-    }
-
   </style>
 </head>
 
 <body>
 
-  <!-- ============================================================
-       GATE SCREEN — shown before story begins
-  ============================================================ -->
-  <div id="gate-screen" role="dialog" aria-modal="true" aria-label="Enter the story">
-
-    <!-- Background image -->
-    <div class="gate-bg-image" aria-hidden="true"></div>
-    <!-- Vignette -->
-    <div class="gate-vignette" aria-hidden="true"></div>
-
-    <div class="gate-content">
-      <p class="gate-eyebrow">A short story</p>
-
-      <h1 class="gate-title">The <em>Last</em> Garden</h1>
-
-      <p class="gate-tagline">A story about what we leave behind</p>
-
-      <!-- Pulsing enter button -->
-      <div class="gate-btn-wrap" aria-hidden="false">
-        <!-- Ripple rings -->
-        <div class="gate-ring"></div>
-        <div class="gate-ring"></div>
-        <div class="gate-ring"></div>
-
-        <button id="enter-btn" aria-label="Enter the story — plays a soft sound">
-          <!-- Leaf SVG -->
-          <svg class="btn-leaf" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M12 22C12 22 4 16 4 9C4 5.13 7.58 2 12 2C16.42 2 20 5.13 20 9C20 16 12 22 12 22Z"
-                  stroke="rgba(232,201,122,0.9)" stroke-width="1" fill="rgba(232,201,122,0.08)"/>
-            <path d="M12 22V9" stroke="rgba(232,201,122,0.5)" stroke-width="0.8" stroke-linecap="round"/>
-          </svg>
-          <span>enter</span>
-        </button>
-      </div>
-
-      <!-- Sound wave visualiser -->
-      <div class="sound-waves" aria-hidden="true" id="sound-waves">
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-        <div class="wave-bar"></div>
-      </div>
-
-    </div>
-
-  </div>
-
-
   <!-- Reading progress bar -->
   <div id="progress-bar" role="progressbar" aria-label="Reading progress" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-
-  <!-- ── Section C: Ambient sound toggle ── -->
-  <button id="sound-toggle" class="muted" aria-label="Toggle ambient sound" title="Ambient sound">
-    <!-- Speaker on -->
-    <svg class="icon-on" viewBox="0 0 24 24">
-      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
-      <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/>
-    </svg>
-    <!-- Speaker off -->
-    <svg class="icon-off" viewBox="0 0 24 24">
-      <path d="M11 5L6 9H2v6h4l5 4V5z"/>
-      <line x1="23" y1="9" x2="17" y2="15"/>
-      <line x1="17" y1="9" x2="23" y2="15"/>
-    </svg>
-  </button>
-
-  <!-- Sound live indicator -->
-  <div id="sound-live" aria-hidden="true">
-    <span></span><span></span><span></span><span></span><span></span>
-  </div>
-
-  <!-- ── Section C: Flower nav ── -->
-  <nav id="flower-nav" aria-label="Story navigation"></nav>
-
-  <!-- ── Section E: Reading time ── -->
-  <div id="reading-time" aria-hidden="true">loading...</div>
-
-  <!-- ── Section E: Loading screen ── -->
-  <div id="loading-screen" aria-hidden="true">
-    <p class="loader-text">preparing your story</p>
-    <div class="loader-bar-wrap">
-      <div class="loader-bar"></div>
-    </div>
-  </div>
 
   <!-- Scene navigation dots -->
   <nav id="scene-nav" aria-label="Story navigation">
@@ -1646,9 +552,7 @@
       The <em>Last</em> Garden
     </h1>
 
-    <div id="hero-typing" aria-live="polite" aria-label="Story themes">
-      <span class="typing-text"></span><span class="typing-cursor" aria-hidden="true"></span>
-    </div>
+    <p class="hero-subtitle">A story about what we leave behind</p>
 
     <div class="hero-scroll-hint" aria-hidden="true">
       <div class="scroll-line"></div>
@@ -1675,26 +579,26 @@
     <div class="scene-content">
       <p class="scene-number" aria-hidden="true">I</p>
       <h2 class="scene-title" id="scene-1-title">The Diagnosis</h2>
-      <span class="scene-rule"></span>
 
       <div class="prose" role="article">
         <p>Maya learned about the tumor on a Tuesday.</p>
 
-        <p>Not a dramatic Tuesday. Just October light through hospital blinds in <span class="text-gold">long golden strips</span>, and someone in the hallway laughing at their phone.</p>
+        <p>Not a dramatic Tuesday — no storm outside, no ominous silence in the doctor's office. Just an ordinary Tuesday in October, where the light came through the hospital blinds in long golden strips and someone in the hallway was laughing at something on their phone.</p>
 
-        <p>She sat with the word <span class="word-terminal" aria-label="terminal">terminal</span> the way you sit with a stone from a riverbed. Turning it over. Feeling its weight.</p>
+        <p>She sat with the word <span class="word-terminal" aria-label="terminal">terminal</span> for a long moment, the way you sit with a stone you've just picked up from a riverbed. Turning it over. Feeling its weight.</p>
 
         <p>She didn't cry. Not then.</p>
 
-        <p>She drove home and stood at the kitchen window. The garden her mother had planted thirty years ago looked back at her. The rose bushes had <span class="text-gold">gone wild</span>. The stone path was moss. The bench had split.</p>
+        <p>She drove home, made tea she didn't drink, and stood at the kitchen window looking at the garden her mother had planted thirty years ago — the one Maya had ignored for most of her adult life. The rose bushes had gone wild. The stone path was swallowed by moss. The old wooden bench had greyed and split at one arm.</p>
 
         <p><em>Six months</em>, the doctor had said. <em>Maybe eight.</em></p>
+
+        <p>Maya looked at the garden for a long time.</p>
 
         <p>Then she put on her boots.</p>
       </div>
     </div>
 
-    <div class="scene-fade-strip" aria-hidden="true"></div>
   </section>
 
   <!-- ============================================================
@@ -1716,16 +620,13 @@
     <div class="scene-content">
       <p class="scene-number" aria-hidden="true">II</p>
       <h2 class="scene-title" id="scene-2-title">The Digging</h2>
-      <span class="scene-rule"></span>
 
       <div class="prose">
         <p>She started the next morning before sunrise.</p>
 
-        <p>Soil is honest. It doesn't soften anything. It pushes back, smells of rain, and asks nothing of you except that you show up. Maya found this a relief.</p>
+        <p>There is something honest about soil. It doesn't soften the truth for you. It is cold, or warm, resistant, or yielding — exactly as it is. Maya found this comforting. She had spent months in rooms where everyone was choosing their words so carefully, like they were afraid the wrong syllable might shatter her. The garden didn't do that. It just pushed back against the trowel and smelled of rain.</p>
 
-        <p>Her hands had forgotten. But the body remembers. The angle of the wrist. The palm, not the fingers. Her mother had taught her this when she was seven, kneeling in lavender light beside a woman who made everything feel like a secret worth keeping.</p>
-
-        <p class="pull-quote">The garden didn't soften the truth. It just pushed back.</p>
+        <p>She worked slowly at first. Her hands had forgotten this. But the body remembers things the mind thinks it has moved past — the particular angle of the wrist when planting a bulb, the way you firm the soil with your palm, not your fingers. Her mother had taught her this. She was seven years old again, kneeling beside a woman who smelled of earth and lavender, being shown something that felt like a secret.</p>
 
         <p>Her neighbor Priya leaned over the fence one afternoon.</p>
       </div>
@@ -1740,18 +641,6 @@
         <p>And she did.</p>
       </div>
 
-    </div>
-
-    <!-- Extra image strip at bottom of scene 2 -->
-    <div class="scene-extra-img" aria-hidden="true">
-      <img
-        src="images/scene2-extra.webp"
-        alt=""
-        loading="lazy"
-        decoding="async"
-        class="extra-img"
-      />
-      <div class="extra-img-caption">The honest weight of soil</div>
     </div>
 
   </section>
@@ -1775,38 +664,24 @@
     <div class="scene-content">
       <p class="scene-number" aria-hidden="true">III</p>
       <h2 class="scene-title" id="scene-3-title">The Visitors</h2>
-      <span class="scene-rule"></span>
 
-      <!-- Inset extra image — floats right beside text -->
-      <div class="scene3-inset" aria-hidden="true">
-        <img
-          src="images/scene3-extra.webp"
-          alt=""
-          loading="lazy"
-          decoding="async"
-          class="inset-img"
-        />
+      <div class="prose">
+        <p>Word traveled the way words do in neighborhoods that still know each other's names.</p>
+
+        <p>Maya's old schoolfriend <strong style="font-weight:400;color:var(--c-gold-mid)" class="character-name">Devika</strong> came on a Saturday with her daughter, who was six and very serious about earthworms. Maya showed her that earthworms were a sign of healthy soil — that where they lived, things grew — and the girl listened with the gravity of someone receiving important classified information.</p>
+
+        <p>Her brother <strong style="font-weight:400;color:var(--c-gold-mid)" class="character-name">Arjun</strong> came from Delhi, arriving unannounced with his sleeves already rolled up, asking where the heavy bags of compost were. They didn't talk about the hospital. They planted a lemon tree together in the far corner — the one their mother had always wanted but never got around to. When they pressed the last of the soil around its base, Arjun sat back on his heels and cleared his throat twice before he could speak.</p>
+      </div>
+
+      <div class="dialogue" role="group" aria-label="Arjun and Maya's exchange">
+        <p class="dialogue-line">"She would have loved this."</p>
+        <p class="dialogue-line response">"She does love this."</p>
       </div>
 
       <div class="prose">
-        <p>Word traveled the way it does in places that still know each other's names.</p>
+        <p>And somehow, it didn't feel like denial. It felt like the truest thing she'd said in months.</p>
 
-        <p><strong style="font-weight:400;color:var(--c-gold-mid)" class="character-name">Devika</strong> came with her six year old daughter, who was very serious about earthworms. Maya explained that where earthworms live, things grow. The girl listened like she was receiving classified information.</p>
-
-        <p>Her brother <strong style="font-weight:400;color:var(--c-gold-mid)" class="character-name">Arjun</strong> arrived from Delhi with his sleeves already rolled up. They planted a lemon tree in the far corner. The one their mother had always wanted. When the soil was pressed around its base, Arjun sat back and cleared his throat twice.</p>
-      </div>
-
-      <!-- BREAKOUT QUOTE — full width emotional peak -->
-      <div id="arjun-quote" role="blockquote" aria-label="The emotional turning point">
-        <span class="quote-main">"She would have loved this."</span>
-        <span class="quote-response">"She does love this."</span>
-        <span class="quote-attr">— Arjun &amp; Maya</span>
-      </div>
-
-      <div class="prose">
-        <p>It didn't feel like denial. It felt like the truest thing she had said in months.</p>
-
-        <p>The appointments continued. The garden continued too.</p>
+        <p>The doctor's appointments continued. The garden continued too.</p>
       </div>
 
     </div>
@@ -1832,33 +707,32 @@
     <div class="scene-content">
       <p class="scene-number" aria-hidden="true">IV</p>
       <h2 class="scene-title" id="scene-4-title">The Blooming</h2>
-      <span class="scene-rule"></span>
 
       <div class="prose">
-        <p>Spring came early.</p>
+        <p>Spring came early that year.</p>
 
-        <p>The roses came back fierce and overreaching, exactly like her mother. Then lavender, marigolds, and a volunteer sunflower near the bench Arjun had repaired with mismatched wood that somehow looked exactly right.</p>
+        <p>The roses came back first — fierce and overreaching, exactly like her mother had been. Then the lavender, and the marigolds she'd planted along the stone path, and a volunteer sunflower that appeared with no explanation near the old bench, which Arjun had repaired with mismatched wood that somehow looked exactly right.</p>
 
-        <p>Maya sat with her tea, finally drunk, and watched a bee negotiate with a rose. She felt unhurried.</p>
-
-        <p class="pull-quote">Not because she had forgotten. She hadn't forgotten anything.</p>
+        <p>Maya sat on that bench on a warm March morning with her tea — finally drunk, this time — and watched a bee negotiate with a rose. She felt, inexplicably, unhurried.</p>
 
         <p>She had been afraid, she realized,</p>
       </div>
 
       <p class="revelation" id="revelation-text">
-        not of dying. But of disappearing.<br>
-        Of leaving no mark.<br>
-        No sign she had been here<br>
+        not of dying — but of disappearing.<br>
+        Of living a life that left no mark,<br>
+        no weight, no sign that she had been here<br>
         and had cared about things.
       </p>
 
       <div class="prose">
-        <p>The lemon tree would grow.</p>
+        <p>But the lemon tree would grow.</p>
 
-        <p>Devika's daughter knew about earthworms now. <strong style="font-weight:300;font-style:italic;color:var(--c-gold)">Priya</strong> had started her own herb garden, almost by accident, the way good things begin.</p>
+        <p>Devika's daughter now knew about earthworms.</p>
 
-        <p>And every spring, without asking, the roses would come back. Fierce and overreaching and alive.</p>
+        <p><strong style="font-weight:300;font-style:italic;color:var(--c-gold)">Priya</strong> had started her own small herb garden after coming over so many times, almost by accident, the way good things often begin.</p>
+
+        <p>And every spring, without asking, these roses would come back — fierce and overreaching and alive.</p>
       </div>
 
     </div>
@@ -1873,39 +747,19 @@
     <div class="scene-content">
       <p class="scene-number" style="color: rgba(44,24,16,0.5);" aria-hidden="true">V</p>
       <h2 class="scene-title" id="scene-5-title">The Letter</h2>
-      <span class="scene-rule"></span>
 
       <div class="prose">
-        <p>She wrote the letter to no one. Or maybe everyone.</p>
+        <p>She wrote the letter to no one in particular. Or maybe everyone.</p>
       </div>
 
       <div class="letter-wrap" role="complementary" aria-label="Maya's letter">
-
-        <!-- Wax seal SVG -->
-        <div class="letter-seal" aria-hidden="true">
-          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="24" cy="24" r="22" fill="#8b3a1a" opacity="0.9"/>
-            <circle cx="24" cy="24" r="18" fill="none" stroke="#c9703a" stroke-width="1" opacity="0.6"/>
-            <!-- Leaf impression -->
-            <path d="M24 12 C28 16, 32 20, 24 28 C16 20, 20 16, 24 12Z"
-                  fill="none" stroke="#f5d4a0" stroke-width="1" opacity="0.7"/>
-            <line x1="24" y1="28" x2="24" y2="34"
-                  stroke="#f5d4a0" stroke-width="0.8" opacity="0.7"/>
-          </svg>
-        </div>
-
-        <span class="letter-salutation">To whoever finds this garden —</span>
-
         <p class="letter-text">
-          I don't know when you'll find this garden. Gardens have their own plans. But if it's spring, the roses will be showing off. Let them. My mother planted them thirty years ago and they've outlasted everything.
+          I don't know when you'll find this garden, or what state it'll be in. Gardens have their own plans. But if it's spring when you're reading this, the roses will be showing off. Let them. My mother planted them thirty years ago and they've outlasted most things I thought would last.
           <br><br>
-          Legacy isn't about being remembered. It's about what keeps growing after you stop tending it. The kindness that travels from person to person. The lemon tree fruiting for people I'll never meet.
+          I used to think legacy was about being remembered. I don't think that anymore. I think it's about what keeps growing after you stop tending it. The kindness that passed from my mother to me to the girl next door who now knows earthworms are a blessing. The lemon tree that will fruit for people I'll never meet.
           <br><br>
           I was here. I loved things. I put my hands in the soil.
         </p>
-
-        <span class="letter-signoff">— Maya</span>
-
       </div>
 
       <div class="final-lines" aria-label="Story's closing lines">
@@ -1914,8 +768,8 @@
       </div>
 
       <div class="prose">
-        <p>She folded the letter and buried it in a small tin at the base of the lemon tree.</p>
-        <p>Then she poured more tea and listened to the bees.</p>
+        <p>She folded the letter, tucked it in a small tin she'd found in her mother's kitchen, and buried it at the base of the lemon tree.</p>
+        <p>Then she poured herself more tea, sat in the warm morning light, and listened to the bees.</p>
       </div>
 
     </div>
@@ -1939,12 +793,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
   <script>
-    // ── Fix: Always start from top on reload ──────────────────
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
-    }
-    window.scrollTo(0, 0);
-
     // Progress bar
     const progressBar = document.getElementById('progress-bar');
     window.addEventListener('scroll', () => {
