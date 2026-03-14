@@ -1480,7 +1480,26 @@
       z-index: 2;
     }
 
-  </style>
+  
+/* ================= Falling Leaves Effect ================= */
+.falling-leaves{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+  z-index:3;
+}
+
+.leaf{
+  position:absolute;
+  width:14px;
+  height:14px;
+  background:linear-gradient(135deg,#e8c97a,#c9a84c);
+  border-radius:50% 0 50% 0;
+  opacity:0.85;
+}
+
+</style>
 </head>
 
 <body>

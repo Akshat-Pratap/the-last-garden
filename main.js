@@ -1108,3 +1108,46 @@ if(window.matchMedia('(prefers-reduced-motion:reduce)').matches){
     if(el.style.transform&&el.style.transform!=='none') el.style.transform='none';
   });
 }
+
+/* ============================================================
+   FALLING LEAVES — LOOPING EFFECT
+============================================================ */
+(function fallingLeaves(){
+
+  const scene = document.querySelector("#scene-1");
+  if(!scene) return;
+
+  const container = document.createElement("div");
+  container.className = "falling-leaves";
+  scene.appendChild(container);
+
+  function spawnLeaf(){
+
+    const leaf = document.createElement("div");
+    leaf.className = "leaf";
+
+    const startX = Math.random()*window.innerWidth;
+    const size = Math.random()*10+8;
+
+    leaf.style.left = startX + "px";
+    leaf.style.top = "-20px";
+    leaf.style.width = size+"px";
+    leaf.style.height = size+"px";
+
+    container.appendChild(leaf);
+
+    gsap.to(leaf,{
+      y: window.innerHeight + 40,
+      x: "+=" + (Math.random()*120-60),
+      rotation: Math.random()*360,
+      duration: Math.random()*6 + 4,
+      ease: "power1.in",
+      onComplete: ()=> leaf.remove()
+    });
+  }
+
+  setInterval(()=>{
+    spawnLeaf();
+  },450);
+
+})();
